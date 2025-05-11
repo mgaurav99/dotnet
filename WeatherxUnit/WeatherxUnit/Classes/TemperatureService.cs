@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WeatherxUnit.Interfaces;
+
+namespace WeatherxUnit.Classes
+{
+    /// <summary>
+    ///  TemperatureService
+    ///  Calculates temperature
+    /// </summary>
+    public class TemperatureService : ITemperature
+    {
+
+        /// <summary>
+        ///  Getting temperature
+        /// </summary>
+        /// <returns>int</returns>
+        public int GetTemperature()
+        {
+
+            Random random = new Random();
+            return  random.Next(10, 50);
+
+        }
+    }
+}

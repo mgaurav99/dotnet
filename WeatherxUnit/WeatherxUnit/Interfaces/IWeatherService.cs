@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WeatherxUnit
+namespace WeatherxUnit.Interfaces
 {
     public interface IWeatherService
     {
-        int GetTemperature(string city);
+        string GetClimate(string city);
     }
 }

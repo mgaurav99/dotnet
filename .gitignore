@@ -2,6 +2,9 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
+/WeatherxUnit/.vs
+/WeatherxUnit/WeatherxUnit/bin/Debug/net8.0
+/WeatherxUnit/WeatherxUnit/obj
 /.vs
 /WeatherxUnit/WeatherReport/bin
 /WeatherxUnit/WeatherReport/obj

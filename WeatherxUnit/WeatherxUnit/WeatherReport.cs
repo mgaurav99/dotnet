@@ -11,7 +11,7 @@ public class WeatherReport
 
     public string GetWeatherMessage(string city)
     {
-        int temp = _weatherService.GetTemperature(city);
-        return temp > 25 ? "Warm" : "Cold";
+        int tempp = _weatherService.GetTemperature(city);
+        return tempp > 25 ? "Warm" : "Cold";
     }
 }

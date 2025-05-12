@@ -29,20 +29,42 @@ namespace WeatherReportTest
         /// Testing for cold condition
         /// </summary>
         [Fact]
-        public void TestClimate_Cold() /// check name convention *
+        public void GetClimate_LocationIsMumbai_Returnscold() /// check name convention *
         {
             //Arrange
             _mockTemperature.Setup(x => x.GetTemperature()).Returns(9);
-            string city = "delhi";
+            string city = "mumbai";
             string expectedValue = $"The climate of the {city} is cold";
 
             //Act
             string msg = _weatherService.GetClimate(city);
 
             //Assert
-            _mockLogger.Verify(x => x.LogInfo($"This function called for city:{city} at {DateTime.Now} "));
+            _mockLogger.Verify(x => x.LogInfo(It.Is<string>(msg => msg.Contains($"This function called for city:{city}"))));
+            //_mockLogger.Verify(x => x.LogInfo($"This function called for city:{city} at {DateTime.Now} "));
             _mockTemperature.Verify(x => x.GetTemperature());
             Assert.Equal(expectedValue, msg);
+        }
+
+        /// <summary>
+        /// Testing for warm condition
+        /// </summary>
+        [Fact]
+        public void GetClimate_LocationIsDelhi_Returnswarm()
+        {
+            //Arrange
+            _mockTemperature.Setup(x => x.GetTemperature()).Returns(11);
+            string city = "delhi";
+            string expectedValue = $"The climate of the {city} is warm";
+
+            //Act
+            string message = _weatherService.GetClimate(city);
+
+            //Assert
+            _mockLogger.Verify(x => x.LogInfo(It.Is<string>(msg => msg.Contains($"This function called for city:{city}"))));
+            _mockTemperature.Verify(x => x.GetTemperature());
+            Assert.Equal(expectedValue, message);
+
         }
     }
 }

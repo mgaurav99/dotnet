@@ -13,7 +13,7 @@ namespace WeatherxUnit.Interfaces
     public interface ITemperature
     {
         /// <summary>
-        ///  Getting temperature
+        ///  Getting random temperature for now
         /// </summary>
         /// <returns>int</returns>
         int GetTemperature();

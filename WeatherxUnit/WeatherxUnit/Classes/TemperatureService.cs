@@ -15,7 +15,7 @@ namespace WeatherxUnit.Classes
     {
 
         /// <summary>
-        ///  Getting temperature
+        ///  Getting  random temperature 
         /// </summary>
         /// <returns>int</returns>
         public int GetTemperature()

@@ -36,12 +36,12 @@ public class WeatherReportService : IWeatherService
         }
         else if (temp > 10 && temp < 30)
         {
-            return "warm";
+            climate = "warm";
         }
 
         else if (temp >= 30)
         {
-            return "hot";
+            climate = "hot";
         }
 
 

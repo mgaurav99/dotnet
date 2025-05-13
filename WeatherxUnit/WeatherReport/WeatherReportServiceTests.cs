@@ -6,33 +6,36 @@ namespace WeatherReportTest
 {
     /// <summary>
     /// WeatherReportServiceTests
-    /// Testing WeatherReportService..
+    /// Testing WeatherReportService
     /// </summary>
     public class WeatherReportServiceTests
     {
-
-        readonly Mock<ILogger> _mockLogger;
-        readonly Mock<ITemperature> _mockTemperature;
-        readonly IWeatherService _weatherService;
+        readonly Mock<ILoggerService> _mockLoggerService;
+        readonly Mock<ITemperatureService> _mockTemperatureService;
+        readonly Mock<IDateTimeService> _mockDateTimeService;
+        readonly IWeatherReportService _weatherService;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public  WeatherReportServiceTests()
+        public WeatherReportServiceTests()
         {
-            _mockLogger = new Mock<ILogger>();
-            _mockTemperature = new Mock<ITemperature>();
-            _weatherService = new WeatherReportService(_mockLogger.Object, _mockTemperature.Object);
+            _mockLoggerService = new Mock<ILoggerService>();
+            _mockTemperatureService = new Mock<ITemperatureService>();
+            _mockDateTimeService = new Mock<IDateTimeService>();
+            _weatherService = new WeatherReportService(_mockLoggerService.Object, _mockTemperatureService.Object, _mockDateTimeService.Object);
         }
 
         /// <summary>
-        /// Testing for cold condition
+        /// Test case for cold condition
         /// </summary>
         [Fact]
-        public void GetClimate_LocationIsMumbai_Returnscold() /// check name convention *
+        public void GetClimate_TemperatureLessThan10_ReturnsCold()
         {
             //Arrange
-            _mockTemperature.Setup(x => x.GetTemperature()).Returns(9);
+            string sampleDate = "2023-10-01 12:00:00";
+            _mockTemperatureService.Setup(x => x.GetTemperature()).Returns(9);
+            _mockDateTimeService.Setup(x => x.GetCurrentDateTime()).Returns(sampleDate);
             string city = "mumbai";
             string expectedValue = $"The climate of the {city} is cold";
 
@@ -40,20 +43,21 @@ namespace WeatherReportTest
             string msg = _weatherService.GetClimate(city);
 
             //Assert
-            _mockLogger.Verify(x => x.LogInfo(It.Is<string>(msg => msg.Contains($"This function called for city:{city}"))));
-            //_mockLogger.Verify(x => x.LogInfo($"This function called for city:{city} at {DateTime.Now} "));
-            _mockTemperature.Verify(x => x.GetTemperature());
+            _mockLoggerService.Verify(x => x.LogInfo($"This function called for city:{city} at {sampleDate} "));
+            _mockTemperatureService.Verify(x => x.GetTemperature());
             Assert.Equal(expectedValue, msg);
         }
 
         /// <summary>
-        /// Testing for warm condition
+        /// Test case for warm condition
         /// </summary>
         [Fact]
-        public void GetClimate_LocationIsDelhi_Returnswarm()
+        public void GetClimate_TemperatureBetween10And30_ReturnsWarm()
         {
             //Arrange
-            _mockTemperature.Setup(x => x.GetTemperature()).Returns(11);
+            string sampleDate = "2023-10-01 12:00:00";
+            _mockTemperatureService.Setup(x => x.GetTemperature()).Returns(11);
+            _mockDateTimeService.Setup(x => x.GetCurrentDateTime()).Returns(sampleDate);
             string city = "delhi";
             string expectedValue = $"The climate of the {city} is warm";
 
@@ -61,10 +65,95 @@ namespace WeatherReportTest
             string message = _weatherService.GetClimate(city);
 
             //Assert
-            _mockLogger.Verify(x => x.LogInfo(It.Is<string>(msg => msg.Contains($"This function called for city:{city}"))));
-            _mockTemperature.Verify(x => x.GetTemperature());
+            _mockLoggerService.Verify(x => x.LogInfo($"This function called for city:{city} at {sampleDate} "));
+            _mockTemperatureService.Verify(x => x.GetTemperature());
             Assert.Equal(expectedValue, message);
+        }
 
+        /// <summary>
+        /// Test case for hot condition
+        /// </summary>
+        [Fact]
+        public void GetClimate_TemperatureGreaterThan30_ReturnsHot()
+        {
+            //Arrange
+            string sampleDate = "2023-10-01 12:00:00";
+            _mockTemperatureService.Setup(x => x.GetTemperature()).Returns(31);
+            _mockDateTimeService.Setup(x => x.GetCurrentDateTime()).Returns(sampleDate);
+            string city = "chennai";
+            string expectedValue = $"The climate of the {city} is hot";
+
+            //Act
+            string message = _weatherService.GetClimate(city);
+
+            //Assert
+            _mockLoggerService.Verify(x => x.LogInfo($"This function called for city:{city} at {sampleDate} "));
+            _mockTemperatureService.Verify(x => x.GetTemperature());
+            Assert.Equal(expectedValue, message);
+        }
+
+        /// <summary>
+        /// Test case for hot condition
+        /// </summary>
+        [Fact]
+        public void GetClimate_TemperatureEqualTo30_ReturnsHot()
+        {
+            //Arrange
+            string sampleDate = "2023-10-01 12:00:00";
+            _mockTemperatureService.Setup(x => x.GetTemperature()).Returns(30);
+            _mockDateTimeService.Setup(x => x.GetCurrentDateTime()).Returns(sampleDate);
+            string city = "chennai";
+            string expectedValue = $"The climate of the {city} is hot";
+
+            //Act
+            string message = _weatherService.GetClimate(city);
+
+            //Assert
+            _mockLoggerService.Verify(x => x.LogInfo($"This function called for city:{city} at {sampleDate} "));
+            _mockTemperatureService.Verify(x => x.GetTemperature());
+            Assert.Equal(expectedValue, message);
+        }
+
+        /// <summary>
+        /// Test case for empty city
+        /// </summary>
+        [Fact]
+        public void GetClimate_CityNotProvided_ThrowArgumentNullException()
+        {
+            //Arrange
+            string city = "";
+            string sampleDate = "2023-10-01 12:00:00";
+            string warningMsg = "No city provided!";
+            _mockDateTimeService.Setup(x => x.GetCurrentDateTime()).Returns(sampleDate);
+
+            //Act
+            var exception = Assert.Throws<ArgumentNullException>(() => _weatherService.GetClimate(city));
+
+            //Assert
+            _mockLoggerService.Verify(x => x.LogInfo($"This function called for city:{city} at {sampleDate} "));
+            _mockLoggerService.Verify(x => x.LogWarning(warningMsg));
+            Assert.Equal("Provide city!", exception.ParamName);
+        }
+
+        /// <summary>
+        /// Test case when city is null
+        /// </summary>
+        [Fact]
+        public void GetClimate_CityIsNull_ThrowArgumentNullException()
+        {
+            //Arrange
+            string city = null;
+            string sampleDate = "2023-10-01 12:00:00";
+            string warningMsg = "No city provided!";
+            _mockDateTimeService.Setup(x => x.GetCurrentDateTime()).Returns(sampleDate);
+
+            //Act
+            var exception = Assert.Throws<ArgumentNullException>(() => _weatherService.GetClimate(city));
+
+            //Assert
+            _mockLoggerService.Verify(x => x.LogInfo($"This function called for city:{city} at {sampleDate} "));
+            _mockLoggerService.Verify(x => x.LogWarning(warningMsg));
+            Assert.Equal("Provide city!", exception.ParamName);
         }
     }
 }

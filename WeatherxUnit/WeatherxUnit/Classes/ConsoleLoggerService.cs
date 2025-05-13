@@ -11,10 +11,10 @@ namespace WeatherxUnit.Classes
     /// ConsoleLogger
     /// Logging related implementations
     /// </summary>
-    public class ConsoleLogger : ILogger
+    public class ConsoleLoggerService : ILoggerService
     {
         /// <summary>
-        /// Loggin errors 
+        /// Logging errors 
         /// </summary>
         /// <param name="message"></param>
         public void LogError(string message)

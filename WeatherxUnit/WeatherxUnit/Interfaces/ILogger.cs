@@ -10,7 +10,7 @@ namespace WeatherxUnit.Interfaces
     /// ILogger
     /// Logging purposes
     /// </summary>
-    public interface ILogger
+    public interface ILoggerService
     {
         /// <summary>
         /// Logging info

@@ -7,16 +7,15 @@ using System.Threading.Tasks;
 namespace WeatherxUnit.Interfaces
 {
     /// <summary>
-    /// IWeatherService
-    /// Fetching weather report/data
+    /// IDateTimeService
+    /// Provides functionality related to date and time
     /// </summary>
-    public interface IWeatherReportService
+    public interface IDateTimeService
     {
         /// <summary>
-        /// Fetching climate on basis of city provided
+        /// Returns the current date and time in a string format
         /// </summary>
-        /// <param name="city"></param>
         /// <returns></returns>
-        string GetClimate(string city);
+        string GetCurrentDateTime();
     }
 }

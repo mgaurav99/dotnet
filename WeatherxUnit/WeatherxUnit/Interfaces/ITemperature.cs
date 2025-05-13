@@ -10,7 +10,7 @@ namespace WeatherxUnit.Interfaces
     /// ITemperature
     /// Calculates temperature
     /// </summary>
-    public interface ITemperature
+    public interface ITemperatureService
     {
         /// <summary>
         ///  Getting random temperature for now

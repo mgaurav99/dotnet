@@ -1,38 +1,53 @@
 ﻿using WeatherxUnit.Interfaces;
 
-public class WeatherReportService : IWeatherService
+/// <summary>
+/// WeatherReportService
+/// This service used for tasks related to weather report
+/// </summary>
+public class WeatherReportService : IWeatherReportService
 {
-    readonly ILogger _logger;
-    readonly ITemperature _temperature;
-    public WeatherReportService(ILogger logger, ITemperature temperature)
+    private readonly ILoggerService _loggerService;
+    private readonly ITemperatureService _temperatureService;
+    private readonly IDateTimeService _dateTimeService;
+
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="logger"></param>
+    /// <param name="temperature"></param>
+    /// <param name="dateTime"></param>
+    /// <exception cref="ArgumentNullException"></exception>
+    public WeatherReportService(ILoggerService logger, ITemperatureService temperature, IDateTimeService dateTime)
     {
-        _logger = logger;
-        _temperature = temperature;
+        _loggerService = logger ?? throw new ArgumentNullException(nameof(logger));
+        _temperatureService = temperature ?? throw new ArgumentNullException(nameof(temperature));
+        _dateTimeService = dateTime ?? throw new ArgumentNullException(nameof(dateTime));
     }
 
-
-
+    /// <summary>
+    /// Returns climate of the city
+    /// </summary>
+    /// <param name="city"></param>
+    /// <returns>string</returns>
+    /// <exception cref="ArgumentNullException"></exception>
     public string GetClimate(string city)
     {
-
-
-        _logger.LogInfo($"This function called for city:{city} at {DateTime.Now} ");
+        string currentDateTime = _dateTimeService.GetCurrentDateTime();
+        _loggerService.LogInfo($"This function called for city:{city} at {currentDateTime} ");
 
         if (String.IsNullOrWhiteSpace(city))
         {
-            _logger.LogWarning("No city provided!");
+            _loggerService.LogWarning("No city provided!");
             throw new ArgumentNullException("Provide city!");
         }
 
-        int temp = _temperature.GetTemperature();  //mock for classes set up for function.
+        int temp = _temperatureService.GetTemperature();
 
         string climate = String.Empty;
 
         if (temp < 10)
         {
             climate = "cold";
-
-
         }
         else if (temp > 10 && temp < 30)
         {
@@ -43,8 +58,6 @@ public class WeatherReportService : IWeatherService
         {
             climate = "hot";
         }
-
-
 
         return $"The climate of the {city} is {climate}";
     }

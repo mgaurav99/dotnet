@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace WeatherxUnit.Interfaces
 {
     /// <summary>
-    /// ILogger
-    /// Logging purposes
+    /// ILoggerService 
+    /// Defines a contract for logging messages at different levels (info, warning, error).
     /// </summary>
     public interface ILoggerService
     {

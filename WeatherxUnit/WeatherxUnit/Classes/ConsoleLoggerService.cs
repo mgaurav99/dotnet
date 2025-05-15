@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using WeatherxUnit.Interfaces;
 
 namespace WeatherxUnit.Classes
 {
     /// <summary>
-    /// ConsoleLogger
-    /// Logging related implementations
+    /// ConsoleLoggerService
+    ///Provides logging functionality by writing messages to the console with appropriate formatting based on the log level.
     /// </summary>
     public class ConsoleLoggerService : ILoggerService
     {
         /// <summary>
-        /// Logging errors 
+        /// Log errors to console using red as foreground color
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">The error message to be loggged. </param>
         public void LogError(string message)
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -24,9 +20,9 @@ namespace WeatherxUnit.Classes
         }
 
         /// <summary>
-        /// Logging information
+        /// Logging information ro console using white as foreground color
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">The information to be logged.</param>
 
         public void LogInfo(string message)
         {
@@ -35,9 +31,9 @@ namespace WeatherxUnit.Classes
         }
 
         /// <summary>
-        /// Logging warnings
+        /// Logging warnings to console using yellow as foreground color
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">Warning to be logged</param>
 
         public void LogWarning(string message)
         {

@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace WeatherxUnit.Interfaces
 {
     /// <summary>
     /// IWeatherService
-    /// Fetching weather report/data
+    /// Defines a contract to get weather report related data
     /// </summary>
     public interface IWeatherReportService
     {
         /// <summary>
-        /// Fetching climate on basis of city provided
+        /// Provides a contract for retrieving weather report data.
         /// </summary>
-        /// <param name="city"></param>
-        /// <returns></returns>
+        /// <param name="city">The name of the city to retrieve climate data for.</param>
+        /// <returns>A string containing the climate information for the specified city.</returns>
         string GetClimate(string city);
     }
 }

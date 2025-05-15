@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using WeatherxUnit.Interfaces;
 
 namespace WeatherxUnit.Classes
@@ -14,12 +10,12 @@ namespace WeatherxUnit.Classes
     public class DateTimeService : IDateTimeService
     {
         /// <summary>
-        /// Returns the current date and time in a string format
+        /// Returns the current date and time 
         /// </summary>
-        /// <returns></returns>
-        public string GetCurrentDateTime()
+        /// <returns>Utc DateTime</returns>
+        public DateTime GetCurrentDateTime()
         {
-            return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            return DateTime.UtcNow;
         }
     }
     

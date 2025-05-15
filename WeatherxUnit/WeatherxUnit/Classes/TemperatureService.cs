@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WeatherxUnit.Interfaces;
+﻿using WeatherxUnit.Interfaces;
 
 namespace WeatherxUnit.Classes
 {
@@ -14,7 +9,7 @@ namespace WeatherxUnit.Classes
     public class TemperatureService : ITemperatureService
     {
         /// <summary>
-        ///  Get  random temperature 
+        ///  Get random temperature 
         /// </summary>
         /// <returns>int</returns>
         public int GetTemperature()

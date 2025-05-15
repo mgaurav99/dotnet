@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace WeatherxUnit.Interfaces
 {
     /// <summary>
     /// IDateTimeService
-    /// Provides functionality related to date and time
+    /// Defines a contract to retrieve date and time related data
     /// </summary>
     public interface IDateTimeService
     {
         /// <summary>
-        /// Returns the current date and time in a string format
+        /// Returns  current date and time in utc 
         /// </summary>
-        /// <returns></returns>
-        string GetCurrentDateTime();
+        /// <returns>DateTime</returns>
+        DateTime GetCurrentDateTime();
     }
 }

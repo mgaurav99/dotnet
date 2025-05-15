@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace WeatherxUnit.Interfaces
 {
     /// <summary>
     /// ITemperature
-    /// Calculates temperature
+    /// Defines a contract for retrieving temperature data.
     /// </summary>
     public interface ITemperatureService
     {
         /// <summary>
-        ///  Getting random temperature for now
+        ///  Get random temperature 
         /// </summary>
         /// <returns>int</returns>
         int GetTemperature();

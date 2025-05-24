@@ -1,57 +1,56 @@
-﻿using WeatherxUnit.Interfaces;
+﻿using WeatherReport.Interfaces;
 
-namespace WeatherxUnit.Classes
+namespace WeatherReport.Classes
 {
-
-    /// <summary>
+    ///<summary>
     /// WeatherReportService
-    /// This service contains tasks related to weather report
+    /// This service contains tasks related to weather report.
     /// </summary>
     public class WeatherReportService : IWeatherReportService
     {
-        private readonly ILoggerService _loggerService;
+        private readonly IConsoleLoggerService _loggerService;
         private readonly ITemperatureService _temperatureService;
         private readonly IDateTimeService _dateTimeService;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="logger">The logging service used for recording operational or diagnostic messages.</param>
-        /// <param name="temperature">The service used to retrieve temperature data.</param>
-        /// <param name="dateTime">The service used to access the current date and time.</param>
-        /// <exception cref="ArgumentNullException">
-        /// /// Thrown if <paramref name="logger"/>, <paramref name="temperature"/>, or <paramref name="dateTime"/> is <c>null</c>.
-        /// </exception>
-        public WeatherReportService(ILoggerService logger, ITemperatureService temperature, IDateTimeService dateTime)
+        /// <param name="loggerService">Service used for recording operational or diagnostic messages.</param>
+        /// <param name="temperatureService">Service used to retrieve temperature data.</param>
+        /// <param name="dateTimeService">Service used to access the current date and time.</param>
+        public WeatherReportService(IConsoleLoggerService loggerService, ITemperatureService temperatureService, 
+            IDateTimeService dateTimeService)
         {
-            _loggerService = logger ?? throw new ArgumentNullException(nameof(logger));
-            _temperatureService = temperature ?? throw new ArgumentNullException(nameof(temperature));
-            _dateTimeService = dateTime ?? throw new ArgumentNullException(nameof(dateTime));
+            _loggerService = loggerService;
+            _temperatureService = temperatureService;
+            _dateTimeService = dateTimeService;
         }
 
         /// <summary>
         /// Returns details regarding climate of the city based on the name of city
         /// </summary>
-        /// <param name="city"></param>
+        /// <param name="city">City for which temperature is searched</param>
         /// <returns>string</returns>
         /// <exception cref="ArgumentNullException"></exception>
         public string GetClimate(string city)
         {
             DateTime currentDateTime = _dateTimeService.GetCurrentDateTime();
-            _loggerService.LogInfo($"This function called for city:{city} at {currentDateTime} ");
+            _loggerService.LogInfo($"This function called for city:{city} at {currentDateTime}");
 
             if (String.IsNullOrWhiteSpace(city))
             {
                 _loggerService.LogWarning("No city provided!");
                 throw new ArgumentNullException("Provide city!");
             }
+
             int temp = _temperatureService.GetTemperature();
             string climate = String.Empty;
+
             if (temp < 10)
             {
                 climate = "cold";
             }
-            else if (temp > 10 && temp < 30)
+            else if (temp >= 10 && temp < 30)
             {
                 climate = "warm";
             }

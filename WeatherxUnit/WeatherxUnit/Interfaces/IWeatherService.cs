@@ -1,6 +1,5 @@
 ﻿
-
-namespace WeatherxUnit.Interfaces
+namespace WeatherReport.Interfaces
 {
     /// <summary>
     /// IWeatherService
@@ -11,7 +10,7 @@ namespace WeatherxUnit.Interfaces
         /// <summary>
         /// Provides a contract for retrieving weather report data.
         /// </summary>
-        /// <param name="city">The name of the city to retrieve climate data for.</param>
+        /// <param name="city">The name of the city for which climate data is retrieved.</param>
         /// <returns>A string containing the climate information for the specified city.</returns>
         string GetClimate(string city);
     }

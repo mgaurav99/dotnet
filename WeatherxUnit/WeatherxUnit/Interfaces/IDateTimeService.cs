@@ -1,5 +1,5 @@
 ﻿
-namespace WeatherxUnit.Interfaces
+namespace WeatherReport.Interfaces
 {
     /// <summary>
     /// IDateTimeService

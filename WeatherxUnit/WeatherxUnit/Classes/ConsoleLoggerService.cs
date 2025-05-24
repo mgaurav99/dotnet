@@ -1,18 +1,18 @@
-﻿
-using WeatherxUnit.Interfaces;
+﻿using WeatherReport.Interfaces;
 
-namespace WeatherxUnit.Classes
+namespace WeatherReport.Classes
 {
-    /// <summary>
+    ///<summary>
     /// ConsoleLoggerService
-    ///Provides logging functionality by writing messages to the console with appropriate formatting based on the log level.
+    ///Provides logging functionality by writing messages to the console with appropriate formatting 
+    ///based on the log level.
     /// </summary>
-    public class ConsoleLoggerService : ILoggerService
+    public class ConsoleLoggerService : IConsoleLoggerService
     {
         /// <summary>
-        /// Log errors to console using red as foreground color
+        /// Log errors to console.Use red as foreground color.
         /// </summary>
-        /// <param name="message">The error message to be loggged. </param>
+        /// <param name="message">Error message to be loggged.</param>
         public void LogError(string message)
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -20,10 +20,9 @@ namespace WeatherxUnit.Classes
         }
 
         /// <summary>
-        /// Logging information ro console using white as foreground color
+        /// Log information to console. use white as foreground color.
         /// </summary>
         /// <param name="message">The information to be logged.</param>
-
         public void LogInfo(string message)
         {
             Console.ForegroundColor = ConsoleColor.White;
@@ -31,10 +30,9 @@ namespace WeatherxUnit.Classes
         }
 
         /// <summary>
-        /// Logging warnings to console using yellow as foreground color
+        /// Log warnings to console. Use yellow as foreground color.
         /// </summary>
-        /// <param name="message">Warning to be logged</param>
-
+        /// <param name="message">Warning message to be logged.</param>
         public void LogWarning(string message)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;

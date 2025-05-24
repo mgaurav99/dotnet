@@ -1,7 +1,6 @@
-﻿
-using WeatherxUnit.Interfaces;
+﻿using WeatherReport.Interfaces;
 
-namespace WeatherxUnit.Classes
+namespace WeatherReport.Classes
 {
     /// <summary>
     /// DateTimeService

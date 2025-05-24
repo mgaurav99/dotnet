@@ -1,9 +1,9 @@
 ﻿
 
-namespace WeatherxUnit.Interfaces
+namespace WeatherReport.Interfaces
 {
     /// <summary>
-    /// ITemperature
+    /// ITemperatureService
     /// Defines a contract for retrieving temperature data.
     /// </summary>
     public interface ITemperatureService
